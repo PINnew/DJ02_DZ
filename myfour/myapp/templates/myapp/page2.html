@@ -3,6 +3,149 @@
 {% block title %}Страница 2{% endblock %}
 
 {% block content %}
-    <h1>Страница 2</h1>
-    <p>Содержимое страницы 2.</p>
+<br>
+    <h2>Страница 2</h2><br>
+    <p>
+Создание проекта на Django с использованием Bootstrap.
+Давайте подробно рассмотрим структуру проекта по пунктам.<br>
+<br>
+### 1. Установка и настройка окружения
+
+- **Установка Python и Django**: Убедитесь, что у вас установлен Python. Затем установите Django с помощью команды:
+  ```bash
+  pip install django
+  ```<br>
+<br>
+- **Создание виртуального окружения**: Рекомендуется создавать виртуальное окружение для изоляции зависимостей проекта.
+  ```bash
+  python -m venv myenv
+  source myenv/bin/activate  # для Linux/Mac
+  myenv\Scripts\activate  # для Windows
+  ```<br>
+<br>
+### 2. Создание проекта
+
+- **Создание нового проекта**:
+  ```bash
+  django-admin startproject myproject
+  ```
+<br>
+- **Структура проекта**:
+  ```
+  myproject/
+      manage.py
+      myproject/
+          __init__.py
+          settings.py
+          urls.py
+          asgi.py
+          wsgi.py
+  ```<br>
+<br>
+### 3. Создание приложения
+
+- **Создание нового приложения**:
+  ```bash
+  python manage.py startapp myapp
+  ```
+<br>
+- **Структура приложения**:
+  ```
+  myapp/
+      migrations/
+      __init__.py
+      admin.py
+      apps.py
+      models.py
+      tests.py
+      views.py
+      urls.py  # Создайте этот файл для маршрутизации
+  ```<br>
+<br>
+### 4. Настройка приложения
+
+- **Добавление приложения в настройки**: В файле `settings.py` добавьте ваше приложение в список `INSTALLED_APPS`:
+  ```python
+  INSTALLED_APPS = [
+      ...
+      'myapp',
+  ]
+  ```<br>
+<br>
+### 5. Создание моделей
+
+- **Определение моделей**: В файле `models.py` создайте необходимые модели.
+  ```python
+  from django.db import models
+
+  class MyModel(models.Model):
+      name = models.CharField(max_length=100)
+      description = models.TextField()
+  ```<br>
+<br>
+- **Создание и применение миграций**:
+  ```bash
+  python manage.py makemigrations
+  python manage.py migrate
+  ```<br>
+<br>
+### 6. Настройка URL маршрутизации
+
+- **Создание маршрутов**: В файле `urls.py` вашего приложения определите маршруты.
+  ```python
+  from django.urls import path
+  from .views import index
+
+  urlpatterns = [
+      path('', index, name='index'),
+  ]
+  ```<br>
+<br>
+- **Подключение маршрутов в `urls.py` проекта**:
+  ```python
+  from django.contrib import admin
+  from django.urls import path, include
+
+  urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('myapp.urls')),
+  ]
+  ```<br>
+<br>
+### 7. Создание представлений
+
+- **Определение представлений**: В файле `views.py` создайте функции представления.
+  ```python
+  from django.shortcuts import render
+
+  def index(request):
+      return render(request, 'index.html')
+  ```<br>
+<br>
+### 8. Подключение Bootstrap
+
+- **Скачивание Bootstrap**: Вы можете скачать Bootstrap с официального сайта или подключить через CDN.
+
+- **Создание шаблона**:
+  Создайте папку `templates` в вашем приложении и добавьте файл `index.html`.<br>
+<br>
+### 9. Запуск сервера
+
+- **Запуск разработки**:
+  ```bash
+  python manage.py runserver
+  ```<br>
+<br>
+### 10. Дополнительные настройки:
+
+- **Настройка статических файлов**: Убедитесь, что у вас настроены статические файлы для использования
+        Bootstrap и других ресурсов.
+
+- **Создание форм и админки**: Рассмотрите возможность использования Django Forms для создания форм
+        и настройки панели администратора для управления моделями.<br>
+<br>
+### Заключение.
+Это базовая структура проекта на Django с использованием Bootstrap. Вы можете расширять этот проект, добавляя функциональность, такие как аутентификация пользователей, API, или интеграция с базами данных.
+    </p>
+<br>
 {% endblock %}
